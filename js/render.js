@@ -48,8 +48,25 @@ function renderProjectPage() {
   document.title = project.title + " — Portfolio";
 
   const liveLink = project.liveUrl
-    ? `<a class="project-live" href="${project.liveUrl}" target="_blank" rel="noopener">View Live Site ↗</a>`
+    ? `<a class="project-live" href="${project.liveUrl}" target="_blank" rel="noopener">Visit Site ↗</a>`
     : "";
+
+  const tagline = project.tagline
+    ? `<p class="project-intro">${project.tagline}</p>`
+    : "";
+
+  const secondSection = project.section2Title ? `
+      <div class="project-details">
+        <div class="details-title">${project.section2Title}</div>
+        <div>
+          <p>${project.section2Body || ""}</p>
+        </div>
+      </div>
+
+      <div class="project-gallery">
+        ${(project.section2Gallery || []).map(g => mediaTag(g.type, g.src, "")).join("")}
+      </div>
+  ` : "";
 
   el.innerHTML = `
     <section class="project-header">
@@ -57,6 +74,7 @@ function renderProjectPage() {
         <div class="project-header-grid">
           <div>
             <h1 class="project-title">${project.title}</h1>
+            ${tagline}
             ${liveLink}
           </div>
           <div class="project-meta">
@@ -77,7 +95,7 @@ function renderProjectPage() {
       </div>
 
       <div class="project-details">
-        <div class="section-label">Work Details</div>
+        <div class="details-title">Work Details</div>
         <div>
           <p>${project.intro}</p>
           ${project.body ? `<p>${project.body}</p>` : ""}
@@ -87,7 +105,7 @@ function renderProjectPage() {
       <div class="project-gallery">
         ${project.gallery.map(g => mediaTag(g.type, g.src, "")).join("")}
       </div>
-
+      ${secondSection}
       <div class="project-nav">
         <a href="index.html">← Back to all projects</a>
       </div>

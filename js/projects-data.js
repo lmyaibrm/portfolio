@@ -16,8 +16,18 @@
    - thumbnail: the image shown on the home page grid card
    - heroMedia: the big banner image/video at the top of the project page
    - heroType: "image" or "video" (use "video" for mp4/webm files)
-   - gallery: an array of extra images/gifs shown down the project page.
+   - tagline: OPTIONAL. A short one- or two-sentence line shown right under the
+     project title, above the "Visit Site" link. Leave it out (or delete the
+     line) if you don't want one — the page will just skip it.
+   - intro / body: the two paragraphs shown under the "Work Details" title,
+     under the hero image.
+   - gallery: an array of extra images/gifs shown after the "Work Details" text.
      Each item can be { type: "image", src: "..." } or { type: "video", src: "..." }
+   - section2Title / section2Body / section2Gallery: OPTIONAL second section,
+     shown after the first gallery — same layout as "Work Details" (a title,
+     a paragraph, then more images). Give section2Title a name (e.g. "Outcome",
+     "Process", "Results") to make this section appear at all; leave it out
+     entirely to skip it, just like the old projects below do.
    ========================================================================== */
 
 const projects = [
@@ -27,23 +37,35 @@ const projects = [
     title: "SisterAgency.ai",
     meta: "Brand Identity · UX/UI Design · Product Design",
     thumbnail: "images/sisteragency/thumb.jpg",
-    liveUrl: "https://sisteragency.ai",
-    role: "UI/UX Designer, Researcher",
+    liveUrl: "https://www.instagram.com/sisteragency.ai/",
+    tagline: "As designer and researcher on SisterAgency.ai, I worked across brand identity and UX/UI — from early research and positioning through to the full visual identity, product interface and launch collateral, working alongside a UX designer on the platform's core dashboard.",
+    role: "Brand & UI Designer, UX Researcher",
     year: "2025",
-    type: "Brand Identity · UX/UI Design",
-    deliverables: "Pitch Deck & Presentation",
-    heroType: "image",
+    type: "Branding · UI/UX · Social",
+    deliverables: "Brand Identity · UX Research · Pitch Deck · Social Design",
     heroMedia: "images/sisteragency/hero.jpg",
-    intro: "An agency reimagined for SisterAgency.ai's new social identity and DTC2 — from early research and prototyping through to the full visual identity, product interface, and launch collateral, working alongside a UX designer on the platform's architecture.",
-    body: "Before any visual identity came together, the work started with understanding an app-wide audience of researchers and analysts: we mapped out how conversations happen, and used that to inform every decision that followed. It was important to keep the brand feeling accessible along the way — the goal was a design system that carried personality without ever feeling heavy, and could be extended far beyond the launch scope by the team internally.",
+    intro: "Before any visual identity came together, the work started with understanding an app-wide audience of researchers and analysts: we mapped out how conversations happen, and used that to inform every decision that followed.",
+    body: "It was important to keep the brand feeling accessible along the way — the goal was a design system that carried personality without ever feeling heavy, and could be extended far beyond the launch scope by the team internally.",
     gallery: [
       { type: "image", src: "images/sisteragency/approach.jpg" },
       { type: "image", src: "images/sisteragency/problems-solutions.jpg" },
-      { type: "image", src: "images/sisteragency/personas.jpg" },
+      { type: "image", src: "images/sisteragency/personas.jpg" }
+    ],
+    section2Title: "Building the Brand",
+    section2Body: "From there, the identity came to life across every touchpoint. I developed the wordmark, full brand system, colour palette and typography, along with the app icon and brand collateral — from t-shirt design to a full landing page. I also led design on the pitch deck, social content for Instagram and LinkedIn, and a product reel, alongside UI for the AI agent marketplace dashboard, working closely with the platform's UX designer. The project went on to be exhibited at Web Summit Doha 2025 — a full-circle moment for a brand built from the ground up, research to launch.",
+    section2Gallery: [
       { type: "image", src: "images/sisteragency/marketing-1.jpg" },
-      { type: "image", src: "images/sisteragency/app-icon.jpg" },
-      { type: "image", src: "images/sisteragency/merch.jpg" },
-      { type: "image", src: "images/sisteragency/final-site.jpg" }
+      { type: "image", src: "images/sisteragency/wordmark.gif" },
+      { type: "image", src: "images/sisteragency/icon.gif" },
+      { type: "image", src: "images/sisteragency/collage.png" },
+      { type: "image", src: "images/sisteragency/pres2.png" },
+      { type: "image", src: "images/sisteragency/shirt.png" },
+      { type: "image", src: "images/sisteragency/pres1.png" },
+      { type: "image", src: "images/sisteragency/final-site.jpg" },
+      { type: "image", src: "images/sisteragency/social.gif" },
+      { type: "image", src: "images/sisteragency/link.png" },
+      { type: "image", src: "images/sisteragency/ui1.png" },
+      { type: "image", src: "images/sisteragency/t.png" }
     ]
   },
   {
