@@ -1,6 +1,7 @@
 /* ==========================================================================
    RENDER LOGIC — you shouldn't need to edit this file.
-   Reads projects-data.js and builds the home page cards + project page.
+   Reads projects-data.js and builds the home page cards, project page,
+   and the footer's auto-generated project index.
    ========================================================================== */
 
 function mediaTag(type, src, className) {
@@ -8,6 +9,26 @@ function mediaTag(type, src, className) {
     return `<video class="${className}" src="${src}" autoplay loop muted playsinline></video>`;
   }
   return `<img class="${className}" src="${src}" alt="" loading="lazy">`;
+}
+
+// Builds one work-card's inner HTML (thumb + hover overlay + title/meta).
+// Shared by the home page grid and the "more projects" strip on project.html.
+function workCardHTML(p) {
+  const firstParagraph = (p.sections && p.sections[0] && p.sections[0].paragraphs && p.sections[0].paragraphs[0]) || "";
+  const desc = p.cardDescription || firstParagraph || p.meta || "";
+  return `
+    <a class="work-card" href="project.html?id=${encodeURIComponent(p.id)}">
+      <div class="work-thumb">
+        ${mediaTag(p.heroType === "video" && p.thumbnail.endsWith(".mp4") ? "video" : "image", p.thumbnail, "")}
+        <div class="work-view-btn">View</div>
+        <div class="work-overlay">
+          <p class="work-overlay-desc">${desc}</p>
+        </div>
+      </div>
+      <p class="work-title">${p.title}</p>
+      <p class="work-meta">${p.meta}</p>
+    </a>
+  `;
 }
 
 function renderWorkGrid(containerId, category) {
@@ -20,14 +41,28 @@ function renderWorkGrid(containerId, category) {
     return;
   }
 
-  el.innerHTML = items.map(p => `
-    <a class="work-card" href="project.html?id=${encodeURIComponent(p.id)}">
-      <div class="work-thumb">
-        ${mediaTag(p.heroType === "video" && p.thumbnail.endsWith(".mp4") ? "video" : "image", p.thumbnail, "")}
-      </div>
-      <p class="work-title">${p.title}</p>
-      <p class="work-meta">${p.meta}</p>
-    </a>
+  el.innerHTML = items.map(workCardHTML).join("");
+}
+
+// Builds the footer "Project Index" list — every project, newest first,
+// each linking straight to its project page. Reads the same array as
+// everything else, so a new project in projects-data.js shows up here
+// automatically with no extra work.
+function renderProjectIndex(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+
+  if (projects.length === 0) {
+    el.innerHTML = "";
+    return;
+  }
+
+  const ordered = [...projects].reverse();
+  el.innerHTML = ordered.map(p => `
+    <li>
+      <span class="footer-index-year">${p.year || ""}</span>
+      <a href="project.html?id=${encodeURIComponent(p.id)}">${p.title}</a>
+    </li>
   `).join("");
 }
 
@@ -48,25 +83,52 @@ function renderProjectPage() {
   document.title = project.title + " — Portfolio";
 
   const liveLink = project.liveUrl
-    ? `<a class="project-live" href="${project.liveUrl}" target="_blank" rel="noopener">Visit Site ↗</a>`
+    ? `<a class="project-live" href="${project.liveUrl}" target="_blank" rel="noopener">View Live Site ↗</a>`
     : "";
 
   const tagline = project.tagline
     ? `<p class="project-intro">${project.tagline}</p>`
     : "";
 
-  const secondSection = project.section2Title ? `
+  const dateLabel = project.date || project.year;
+  const dateBadge = dateLabel
+    ? `<div class="project-date-badge">${dateLabel}</div>`
+    : "";
+
+  // Builds one "Brief" / "Solution" / "Outcome" / etc. block:
+  // heading, paragraph(s), optional arrow-bullet list, optional stacked images.
+  function sectionHTML(section, index) {
+    const paragraphs = (section.paragraphs || []).map(p => `<p>${p}</p>`).join("");
+    const bullets = (section.bullets && section.bullets.length)
+      ? `<ul class="section-bullets">${section.bullets.map(b => `<li>${b}</li>`).join("")}</ul>`
+      : "";
+    const images = (section.images && section.images.length)
+      ? `<div class="section-images">${section.images.map(src => mediaTag(src.endsWith(".mp4") || src.endsWith(".webm") ? "video" : "image", src, "")).join("")}</div>`
+      : "";
+    const num = String(index + 1).padStart(2, "0");
+
+    return `
       <div class="project-details">
-        <div class="details-title">${project.section2Title}</div>
+        <div class="details-title">(${num}) ${section.title}</div>
         <div>
-          <p>${project.section2Body || ""}</p>
+          ${paragraphs}
+          ${bullets}
         </div>
       </div>
+      ${images}
+    `;
+  }
 
-      <div class="project-gallery">
-        ${(project.section2Gallery || []).map(g => mediaTag(g.type, g.src, "")).join("")}
-      </div>
-  ` : "";
+  const sectionsHTML = (project.sections || []).map(sectionHTML).join("");
+
+  // Single "next project" link, wrapping around to the first project
+  // once you reach the end of the list — a quick, low-key way to keep
+  // someone moving through the site without repeating the full grid.
+  const currentIndex = projects.findIndex(p => p.id === project.id);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const nextProjectLink = (nextProject && nextProject.id !== project.id)
+    ? `<span class="next-project-eyebrow">Next Project</span><a class="next-project-link" href="project.html?id=${encodeURIComponent(nextProject.id)}">${nextProject.title} ›</a>`
+    : "";
 
   el.innerHTML = `
     <section class="project-header">
@@ -74,15 +136,15 @@ function renderProjectPage() {
         <div class="project-header-grid">
           <div>
             <h1 class="project-title">${project.title}</h1>
+            ${dateBadge}
             ${tagline}
             ${liveLink}
           </div>
           <div class="project-meta">
             <dl>
+              <div><dt>Client</dt><dd>${project.client || project.title}</dd></div>
               <div><dt>Role</dt><dd>${project.role || "—"}</dd></div>
-              <div><dt>Year</dt><dd>${project.year || "—"}</dd></div>
-              <div><dt>Type</dt><dd>${project.type || "—"}</dd></div>
-              <div><dt>Deliverables</dt><dd>${project.deliverables || "—"}</dd></div>
+              <div><dt>Service</dt><dd>${project.deliverables || project.type || "—"}</dd></div>
             </dl>
           </div>
         </div>
@@ -94,22 +156,35 @@ function renderProjectPage() {
         ${mediaTag(project.heroType, project.heroMedia, "")}
       </div>
 
-      <div class="project-details">
-        <div class="details-title">Work Details</div>
-        <div>
-          <p>${project.intro}</p>
-          ${project.body ? `<p>${project.body}</p>` : ""}
-        </div>
-      </div>
+      ${sectionsHTML}
 
-      <div class="project-gallery">
-        ${project.gallery.map(g => mediaTag(g.type, g.src, "")).join("")}
-      </div>
-      ${secondSection}
+      ${nextProjectLink ? `<div class="next-project-row">${nextProjectLink}</div>` : ""}
+    </div>
+
+    ${renderMoreProjects(project.id)}
+
+    <div class="wrap">
       <div class="project-nav">
         <a href="index.html">← Back to all projects</a>
       </div>
     </div>
+  `;
+}
+
+// Shows the other projects as clickable cards at the bottom of a project page
+function renderMoreProjects(currentId) {
+  const others = projects.filter(p => p.id !== currentId);
+  if (others.length === 0) return "";
+
+  return `
+    <section class="more-projects">
+      <div class="wrap">
+        <div class="eyebrow">More Projects</div>
+        <div class="works-grid">
+          ${others.map(workCardHTML).join("")}
+        </div>
+      </div>
+    </section>
   `;
 }
 
@@ -126,4 +201,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderWorkGrid("design-works-grid", "design");
   renderWorkGrid("research-works-grid", "research");
   renderProjectPage();
+  renderProjectIndex("footer-project-index");
 });

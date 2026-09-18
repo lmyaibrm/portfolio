@@ -3,18 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lmya Ibrm. — Portfolio</title>
-<meta name="description" content="Design and research/coding portfolio.">
+<title>Lmya Ibrm. — Design Portfolio</title>
+<meta name="description" content="Design, brand, and research/coding portfolio of Lmya Ibrm.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&family=Geist+Mono:wght@400;700&family=Funnel+Display:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div class="grain-overlay"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
 <nav class="nav">
   <div class="wrap">
-    <div class="nav-logo">Your Name.</div>
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Lmya Ibrm.">
+    </a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <ul class="nav-links">
       <li><a href="#design-works">Design</a></li>
@@ -29,13 +36,14 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-grid">
-      <div class="hero-image">
-        <img src="images/placeholders/hero-portrait.svg" alt="Portrait">
-      </div>
       <div class="hero-copy">
-        <h1>Hi there!</h1>
+        <div class="eyebrow">Portfolio — 2026</div>
+        <h1>I design brand systems and digital products that feel considered, from first sketch to shipped screen — with a research practice running quietly underneath.</h1>
         <p>I craft visually stunning and highly functional designs that elevate brands and create meaningful digital experiences. I also work on research and coding projects on the side. Let's build something exceptional together.</p>
         <a class="link-arrow" href="#about">About me ↓</a>
+      </div>
+      <div class="hero-image">
+        <img src="images/placeholders/hero-portrait.gif" alt="Portrait">
       </div>
     </div>
 
@@ -46,20 +54,40 @@
   </div>
 </header>
 
+<section class="manifesto">
+  <div class="wrap">
+    <span class="manifesto-num">(01)</span>
+    <p class="manifesto-text">Design that earns its place on the page.</p>
+  </div>
+</section>
+
 <section class="works" id="design-works">
   <div class="wrap">
     <div class="works-head">
-      <div class="section-label">Selected Works</div>
+      <div>
+        <div class="eyebrow">Selection — Design</div>
+        <h2>Design Projects</h2>
+      </div>
       <p>Discover curated design work that inspires and delivers impact, showcasing creativity, functionality, and design excellence.</p>
     </div>
     <div class="works-grid" id="design-works-grid"></div>
   </div>
 </section>
 
+<section class="manifesto">
+  <div class="wrap">
+    <span class="manifesto-num">(02)</span>
+    <p class="manifesto-text">Curious enough to build the tools I design for.</p>
+  </div>
+</section>
+
 <section class="works" id="research-works">
   <div class="wrap">
     <div class="works-head">
-      <div class="section-label">Research &amp; Coding</div>
+      <div>
+        <div class="eyebrow">Selection — Research</div>
+        <h2>Research &amp; Coding</h2>
+      </div>
       <p>A separate set of projects focused on research, experimentation, and code rather than visual design.</p>
     </div>
     <div class="works-grid" id="research-works-grid"></div>
@@ -69,12 +97,15 @@
 <section class="services" id="services">
   <div class="wrap">
     <div class="services-head">
-      <div class="section-label">Services</div>
+      <div>
+        <div class="eyebrow">What I Offer</div>
+        <h2>Services</h2>
+      </div>
       <p>From strategy to execution, thoughtful and tailored design solutions that bring your unique vision to life.</p>
     </div>
 
     <div class="service-row">
-      <span class="service-index">01</span>
+      <span class="service-index">(01)</span>
       <div>
         <p class="service-title">Graphic Design</p>
         <p class="service-desc">Creating visually compelling designs that elevate your brand and captivate your audience.</p>
@@ -83,7 +114,7 @@
     </div>
 
     <div class="service-row">
-      <span class="service-index">02</span>
+      <span class="service-index">(02)</span>
       <div>
         <p class="service-title">Lifestyle Photography</p>
         <p class="service-desc">Capturing authentic moments that bring your brand to life.</p>
@@ -92,7 +123,7 @@
     </div>
 
     <div class="service-row">
-      <span class="service-index">03</span>
+      <span class="service-index">(03)</span>
       <div>
         <p class="service-title">Digital Design</p>
         <p class="service-desc">Intuitive and aesthetically pleasing digital experiences.</p>
@@ -101,7 +132,7 @@
     </div>
 
     <div class="service-row">
-      <span class="service-index">04</span>
+      <span class="service-index">(04)</span>
       <div>
         <p class="service-title">Social Media Design</p>
         <p class="service-desc">Engaging visuals that strengthen your online presence.</p>
@@ -111,33 +142,65 @@
   </div>
 </section>
 
+<section class="manifesto">
+  <div class="wrap">
+    <span class="manifesto-num">(03)</span>
+    <p class="manifesto-text">A slow, considered process, every time.</p>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div>
-      <div class="section-label">About Me</div>
-      <h2 class="about-name">Your Name</h2>
+      <div class="eyebrow">Who I Am</div>
+      <h2 class="about-name">Lmya Ibrm.</h2>
       <p class="about-bio">I specialize in turning complex problems into seamless designs, from research to high-fidelity prototypes. Passionate about usability and design systems, I collaborate with teams to build products that are both beautiful and functional.</p>
     </div>
-    <div>
+    <div class="timeline">
       <div class="timeline-row">
-        <div><p class="timeline-role">Senior Product Designer</p><p class="timeline-org">Visionary Labs</p></div>
-        <span class="timeline-year">2025 – Present</span>
+        <div class="timeline-row-head">
+          <div><p class="timeline-role">Senior Product Designer</p><p class="timeline-org">Visionary Labs</p></div>
+          <div class="timeline-right"><span class="timeline-year">2025 – Present</span><span class="timeline-toggle">+</span></div>
+        </div>
+        <div class="timeline-desc">
+          <p>Leading end-to-end product design across the platform, from early discovery through to shipped UI, while mentoring two junior designers and helping set the team's design system standards.</p>
+        </div>
       </div>
       <div class="timeline-row">
-        <div><p class="timeline-role">UI/UX Designer</p><p class="timeline-org">Creative Hive Agency</p></div>
-        <span class="timeline-year">2023–2025</span>
+        <div class="timeline-row-head">
+          <div><p class="timeline-role">UI/UX Designer</p><p class="timeline-org">Creative Hive Agency</p></div>
+          <div class="timeline-right"><span class="timeline-year">2023–2025</span><span class="timeline-toggle">+</span></div>
+        </div>
+        <div class="timeline-desc">
+          <p>Designed interfaces and user flows for a range of client products, working closely with researchers and engineers to turn early concepts into polished, tested experiences.</p>
+        </div>
       </div>
       <div class="timeline-row">
-        <div><p class="timeline-role">Motion Graphics Designer</p><p class="timeline-org">PixelWave Studios</p></div>
-        <span class="timeline-year">2022</span>
+        <div class="timeline-row-head">
+          <div><p class="timeline-role">Motion Graphics Designer</p><p class="timeline-org">PixelWave Studios</p></div>
+          <div class="timeline-right"><span class="timeline-year">2022</span><span class="timeline-toggle">+</span></div>
+        </div>
+        <div class="timeline-desc">
+          <p>Created dynamic animations and visual effects for marketing campaigns, product demos, and brand storytelling. Developed engaging motion designs that enhanced user interaction and improved content engagement across digital platforms.</p>
+        </div>
       </div>
       <div class="timeline-row">
-        <div><p class="timeline-role">Graphic Designer</p><p class="timeline-org">DesignCraft Inc.</p></div>
-        <span class="timeline-year">2021</span>
+        <div class="timeline-row-head">
+          <div><p class="timeline-role">Graphic Designer</p><p class="timeline-org">DesignCraft Inc.</p></div>
+          <div class="timeline-right"><span class="timeline-year">2021</span><span class="timeline-toggle">+</span></div>
+        </div>
+        <div class="timeline-desc">
+          <p>Designed branding, marketing materials, and digital assets for various platforms, ensuring strong visual consistency. Worked on print and digital media, including social media graphics, advertisements, and packaging design.</p>
+        </div>
       </div>
       <div class="timeline-row">
-        <div><p class="timeline-role">Design Intern</p><p class="timeline-org">ArtFlex Solutions</p></div>
-        <span class="timeline-year">2019–2020</span>
+        <div class="timeline-row-head">
+          <div><p class="timeline-role">Design Intern</p><p class="timeline-org">ArtFlex Solutions</p></div>
+          <div class="timeline-right"><span class="timeline-year">2019–2020</span><span class="timeline-toggle">+</span></div>
+        </div>
+        <div class="timeline-desc">
+          <p>Supported the design team with everyday production work, learned the fundamentals of brand systems, and contributed to several small client projects from brief to final delivery.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -146,7 +209,10 @@
 <section class="testimonials" id="reviews">
   <div class="wrap">
     <div class="testimonials-head">
-      <div class="section-label">What People Say</div>
+      <div>
+        <div class="eyebrow">Client Words</div>
+        <h2>What People Say</h2>
+      </div>
       <p>Worked with numerous brands and professionals — here's what a few of them had to say.</p>
     </div>
     <div class="testi-grid">
@@ -176,12 +242,29 @@
 
 <footer class="footer">
   <div class="wrap">
-    <h2 class="footer-title">Stay connected</h2>
-    <a class="footer-cta" href="mailto:hello@example.com">Get in touch →</a>
-    <div class="footer-bottom">
+    <div class="footer-top">
       <div>
-        <p>123-456-7890</p>
-        <p>123 Example Street, City, Country</p>
+        <h2 class="footer-title">Let's build something worth talking about.</h2>
+        <a class="footer-cta" href="mailto:hello@example.com">Get in touch →</a>
+        <div class="footer-contact-details">
+          <p>123-456-7890</p>
+          <p>123 Example Street, City, Country</p>
+        </div>
+      </div>
+      <div>
+        <div class="footer-index-label">Project Index</div>
+        <ul class="footer-index-list" id="footer-project-index"></ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-block">
+        <ul class="footer-socials">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Behance</a></li>
+        </ul>
+        <span class="footer-copyright">© Lmya Ibrm. 2026</span>
       </div>
       <ul class="footer-links">
         <li><a href="#design-works">Works</a></li>
@@ -195,5 +278,6 @@
 
 <script src="js/projects-data.js"></script>
 <script src="js/render.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>

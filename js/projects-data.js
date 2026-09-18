@@ -5,7 +5,7 @@
 
    HOW TO ADD A NEW PROJECT:
    1. Create a folder inside /images/ named after your project, e.g. /images/my-new-project/
-   2. Drop your thumbnail, hero, and gallery images/gifs/videos in that folder
+   2. Drop your thumbnail, hero, and section images/gifs/videos in that folder
    3. Copy one of the objects below, paste it into the "projects" array,
       and edit every field. Give it a unique "id" (no spaces, lowercase-with-dashes).
    4. Save the file and push to GitHub — the home page and project page
@@ -13,21 +13,39 @@
 
    FIELD NOTES:
    - category: "design" or "research"  (controls which section it appears in)
+   - client: OPTIONAL. Shown in the "Client" row on the project page. If left
+     out, it just falls back to using the project's own title.
+   - date: OPTIONAL. Shown in the small rounded badge under the project title
+     (e.g. "DEC 2025"). If left out, falls back to showing the "year" field.
+   - cardDescription: OPTIONAL. The text that fades in over the thumbnail on
+     the home page when you hover a project card. If left out, falls back to
+     the "intro" paragraph, then the "meta" line.
    - thumbnail: the image shown on the home page grid card
    - heroMedia: the big banner image/video at the top of the project page
    - heroType: "image" or "video" (use "video" for mp4/webm files)
    - tagline: OPTIONAL. A short one- or two-sentence line shown right under the
-     project title, above the "Visit Site" link. Leave it out (or delete the
-     line) if you don't want one — the page will just skip it.
-   - intro / body: the two paragraphs shown under the "Work Details" title,
-     under the hero image.
-   - gallery: an array of extra images/gifs shown after the "Work Details" text.
-     Each item can be { type: "image", src: "..." } or { type: "video", src: "..." }
-   - section2Title / section2Body / section2Gallery: OPTIONAL second section,
-     shown after the first gallery — same layout as "Work Details" (a title,
-     a paragraph, then more images). Give section2Title a name (e.g. "Outcome",
-     "Process", "Results") to make this section appear at all; leave it out
-     entirely to skip it, just like the old projects below do.
+     project title, above the "View Live Site" link. Leave it out (or delete
+     the line) if you don't want one — the page will just skip it.
+
+   - sections: this is where the actual case-study writing goes. It's an
+     array, so you can add as many labeled sections as the project needs —
+     "Brief", "Solution", "Outcome", "Process", whatever fits. Each one is:
+       {
+         title: "Brief",                     // the heading shown for this section
+         paragraphs: ["First paragraph.", "Second paragraph."],
+         bullets: ["Point one", "Point two"], // OPTIONAL — shown as a
+                                               // scannable arrow-bullet list,
+                                               // good for listing specific
+                                               // responsibilities/deliverables
+         images: ["images/x/1.jpg", "images/x/2.gif"] // OPTIONAL — shown full
+                                               // width, stacked, right under
+                                               // this section's text
+       }
+     Leave "bullets" or "images" out of a section entirely if you don't need
+     them — the page just skips whatever isn't there. Add as many sections
+     as you want; each renders in order, text first then its own images,
+     which keeps long case studies easy to read instead of one big text
+     dump followed by one giant image gallery.
    ========================================================================== */
 
 const projects = [
@@ -35,6 +53,9 @@ const projects = [
     id: "sisteragency",
     category: "design",
     title: "SisterAgency.ai",
+    client: "SisterAgency",
+    date: "DEC 30, 2025",
+    cardDescription: "Brand and product design for SisterAgency.ai, an AI-powered SaaS platform built to streamline operations and creative workflows for social media marketing agencies — exhibited at Web Summit Doha 2025.",
     meta: "Brand Identity · UX/UI Design · Product Design",
     thumbnail: "images/sisteragency/thumb.jpg",
     liveUrl: "https://www.instagram.com/sisteragency.ai/",
@@ -44,28 +65,52 @@ const projects = [
     type: "Branding · UI/UX · Social",
     deliverables: "Brand Identity · UX Research · Pitch Deck · Social Design",
     heroMedia: "images/sisteragency/hero.jpg",
-    intro: "Before any visual identity came together, the work started with understanding an app-wide audience of researchers and analysts: we mapped out how conversations happen, and used that to inform every decision that followed.",
-    body: "It was important to keep the brand feeling accessible along the way — the goal was a design system that carried personality without ever feeling heavy, and could be extended far beyond the launch scope by the team internally.",
-    gallery: [
-      { type: "image", src: "images/sisteragency/approach.jpg" },
-      { type: "image", src: "images/sisteragency/problems-solutions.jpg" },
-      { type: "image", src: "images/sisteragency/personas.jpg" }
-    ],
-    section2Title: "Building the Brand",
-    section2Body: "From there, the identity came to life across every touchpoint. I developed the wordmark, full brand system, colour palette and typography, along with the app icon and brand collateral — from t-shirt design to a full landing page. I also led design on the pitch deck, social content for Instagram and LinkedIn, and a product reel, alongside UI for the AI agent marketplace dashboard, working closely with the platform's UX designer. The project went on to be exhibited at Web Summit Doha 2025 — a full-circle moment for a brand built from the ground up, research to launch.",
-    section2Gallery: [
-      { type: "image", src: "images/sisteragency/marketing-1.jpg" },
-      { type: "image", src: "images/sisteragency/wordmark.gif" },
-      { type: "image", src: "images/sisteragency/icon.gif" },
-      { type: "image", src: "images/sisteragency/collage.png" },
-      { type: "image", src: "images/sisteragency/pres2.png" },
-      { type: "image", src: "images/sisteragency/shirt.png" },
-      { type: "image", src: "images/sisteragency/pres1.png" },
-      { type: "image", src: "images/sisteragency/final-site.jpg" },
-      { type: "image", src: "images/sisteragency/social.gif" },
-      { type: "image", src: "images/sisteragency/link.png" },
-      { type: "image", src: "images/sisteragency/ui1.png" },
-      { type: "image", src: "images/sisteragency/t.png" }
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "Before any visual identity came together, the work started with understanding an app-wide audience of researchers and analysts: we mapped out how conversations happen, and used that to inform every decision that followed.",
+          "It was important to keep the brand feeling accessible along the way — the goal was a design system that carried personality without ever feeling heavy, and could be extended far beyond the launch scope by the team internally."
+        ],
+        images: [
+          "images/sisteragency/approach.jpg",
+          "images/sisteragency/problems-solutions.jpg",
+          "images/sisteragency/personas.jpg"
+        ]
+      },
+      {
+        title: "Solution",
+        paragraphs: [
+          "From there, the identity came to life across every touchpoint. I developed the wordmark, full brand system, colour palette and typography, along with the app icon and brand collateral, working closely with the platform's UX designer on the AI agent marketplace dashboard."
+        ],
+        bullets: [
+          "Developed the wordmark, colour system, and typography for the full brand identity",
+          "Designed the app icon, brand collateral, and t-shirt/merch design",
+          "Led design on the pitch deck and a full landing page build",
+          "Created social content for Instagram and LinkedIn, plus a product reel",
+          "Designed UI for the AI agent marketplace dashboard alongside the platform's UX designer"
+        ],
+        images: [
+          "images/sisteragency/marketing-1.jpg",
+          "images/sisteragency/wordmark.gif",
+          "images/sisteragency/icon.gif",
+          "images/sisteragency/collage.png",
+          "images/sisteragency/pres2.png",
+          "images/sisteragency/shirt.png",
+          "images/sisteragency/pres1.png",
+          "images/sisteragency/final-site.jpg",
+          "images/sisteragency/social.gif",
+          "images/sisteragency/link.png",
+          "images/sisteragency/ui1.png",
+          "images/sisteragency/t.png"
+        ]
+      },
+      {
+        title: "Outcome",
+        paragraphs: [
+          "The project went on to be exhibited at Web Summit Doha 2025 — a full-circle moment for a brand built from the ground up, research to launch."
+        ]
+      }
     ]
   },
   {
@@ -81,12 +126,24 @@ const projects = [
     deliverables: "Social Media Design",
     heroType: "image",
     heroMedia: "images/charity-week/hero.jpg",
-    intro: "A full campaign identity for Charity Week Ireland 2026, uniting the community to serve the world's most vulnerable through a coordinated push across universities and social channels.",
-    body: "The brief called for something bold enough to cut through a crowded social feed, while staying flexible enough to adapt across dozens of individual society accounts running their own local events under one shared campaign. I built a small system of colour, type, and iconography that any volunteer team could apply themselves without a designer on hand for every post.",
-    gallery: [
-      { type: "image", src: "images/charity-week/post-1.jpg" },
-      { type: "image", src: "images/charity-week/post-2.jpg" },
-      { type: "image", src: "images/charity-week/post-3.jpg" }
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "A full campaign identity for Charity Week Ireland 2026, uniting the community to serve the world's most vulnerable through a coordinated push across universities and social channels."
+        ]
+      },
+      {
+        title: "Solution",
+        paragraphs: [
+          "The brief called for something bold enough to cut through a crowded social feed, while staying flexible enough to adapt across dozens of individual society accounts running their own local events under one shared campaign. I built a small system of colour, type, and iconography that any volunteer team could apply themselves without a designer on hand for every post."
+        ],
+        images: [
+          "images/charity-week/post-1.jpg",
+          "images/charity-week/post-2.jpg",
+          "images/charity-week/post-3.jpg"
+        ]
+      }
     ]
   },
   {
@@ -102,10 +159,20 @@ const projects = [
     deliverables: "Portfolio Site",
     heroType: "image",
     heroMedia: "images/uqool/hero.jpg",
-    intro: "A minimal portfolio site for the Uqool Podcast — clean, confident, and built to let the episode artwork do the talking.",
-    body: "Kept the interface intentionally quiet so the show's own visual identity — bright gradients, bold character illustration — could carry the page without competing with UI chrome.",
-    gallery: [
-      { type: "image", src: "images/uqool/detail-1.jpg" }
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "A minimal portfolio site for the Uqool Podcast — clean, confident, and built to let the episode artwork do the talking."
+        ]
+      },
+      {
+        title: "Solution",
+        paragraphs: [
+          "Kept the interface intentionally quiet so the show's own visual identity — bright gradients, bold character illustration — could carry the page without competing with UI chrome."
+        ],
+        images: ["images/uqool/detail-1.jpg"]
+      }
     ]
   },
   {
@@ -121,10 +188,20 @@ const projects = [
     deliverables: "Full Site Build",
     heroType: "image",
     heroMedia: "images/uqud/hero.jpg",
-    intro: "Revana Studio needed a site that felt like an extension of their own creative agency work — architectural, considered, and unapologetically editorial.",
-    body: "The layout borrows from print design conventions — generous margins, a strict grid, large type moments — to give the agency's project photography room to breathe.",
-    gallery: [
-      { type: "image", src: "images/uqud/detail-1.jpg" }
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "Revana Studio needed a site that felt like an extension of their own creative agency work — architectural, considered, and unapologetically editorial."
+        ]
+      },
+      {
+        title: "Solution",
+        paragraphs: [
+          "The layout borrows from print design conventions — generous margins, a strict grid, large type moments — to give the agency's project photography room to breathe."
+        ],
+        images: ["images/uqud/detail-1.jpg"]
+      }
     ]
   },
   {
@@ -140,9 +217,14 @@ const projects = [
     deliverables: "UI Concepts",
     heroType: "image",
     heroMedia: "images/ucc-isoc/hero.jpg",
-    intro: "UI concepts for UCC ISoc's members app, focused on making event sign-up effortless during Freshers' Week.",
-    body: "",
-    gallery: []
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "UI concepts for UCC ISoc's members app, focused on making event sign-up effortless during Freshers' Week."
+        ]
+      }
+    ]
   },
   {
     id: "girls-india",
@@ -157,9 +239,14 @@ const projects = [
     deliverables: "Apparel Design",
     heroType: "image",
     heroMedia: "images/girls-india/hero.jpg",
-    intro: "Apparel and merchandise design for the Girls India initiative.",
-    body: "",
-    gallery: []
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "Apparel and merchandise design for the Girls India initiative."
+        ]
+      }
+    ]
   },
   {
     id: "eo-group",
@@ -174,9 +261,14 @@ const projects = [
     deliverables: "Laptop Screen Mockup",
     heroType: "image",
     heroMedia: "images/eo-group/hero.jpg",
-    intro: "Screen mockup and presentation design for eo group.",
-    body: "",
-    gallery: []
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "Screen mockup and presentation design for eo group."
+        ]
+      }
+    ]
   },
 
   /* ------------------------------------------------------------------
@@ -195,8 +287,19 @@ const projects = [
     deliverables: "Paper & Codebase",
     heroType: "image",
     heroMedia: "images/placeholders/research-thumb.svg",
-    intro: "Replace this entry with your first research or coding project — same fields as a design project, just filed under the research category.",
-    body: "Add your write-up here: the question you investigated, your method, and what you found.",
-    gallery: []
+    sections: [
+      {
+        title: "Brief",
+        paragraphs: [
+          "Replace this entry with your first research or coding project — same fields as a design project, just filed under the research category."
+        ]
+      },
+      {
+        title: "Solution",
+        paragraphs: [
+          "Add your write-up here: the question you investigated, your method, and what you found."
+        ]
+      }
+    ]
   }
 ];

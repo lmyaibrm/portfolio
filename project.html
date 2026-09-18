@@ -6,14 +6,21 @@
 <title>Project — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&family=Geist+Mono:wght@400;700&family=Funnel+Display:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="project-page">
+
+<div class="grain-overlay"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
 
 <nav class="nav">
   <div class="wrap">
-    <a class="nav-logo" href="index.html">Your Name.</a>
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Lmya Ibrm.">
+    </a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <ul class="nav-links">
       <li><a href="index.html#design-works">Works</a></li>
@@ -28,12 +35,29 @@
 
 <footer class="footer">
   <div class="wrap">
-    <h2 class="footer-title">Stay connected</h2>
-    <a class="footer-cta" href="mailto:hello@example.com">Get in touch →</a>
-    <div class="footer-bottom">
+    <div class="footer-top">
       <div>
-        <p>123-456-7890</p>
-        <p>123 Example Street, City, Country</p>
+        <h2 class="footer-title">Let's build something worth talking about.</h2>
+        <a class="footer-cta" href="mailto:hello@example.com">Get in touch →</a>
+        <div class="footer-contact-details">
+          <p>123-456-7890</p>
+          <p>123 Example Street, City, Country</p>
+        </div>
+      </div>
+      <div>
+        <div class="footer-index-label">Project Index</div>
+        <ul class="footer-index-list" id="footer-project-index"></ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-block">
+        <ul class="footer-socials">
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Behance</a></li>
+        </ul>
+        <span class="footer-copyright">© Lmya Ibrm. 2026</span>
       </div>
       <ul class="footer-links">
         <li><a href="index.html#design-works">Works</a></li>
@@ -47,5 +71,6 @@
 
 <script src="js/projects-data.js"></script>
 <script src="js/render.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>
